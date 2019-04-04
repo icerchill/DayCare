@@ -678,7 +678,7 @@ public class GUI extends javax.swing.JFrame {
         }
         updateStudentTable();
         updateStudentCountLabel();
-        
+        upadateImmTable();
     }//GEN-LAST:event_importStudentBtnActionPerformed
 
     private void importRuleBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importRuleBtnActionPerformed
@@ -842,21 +842,20 @@ public class GUI extends javax.swing.JFrame {
     private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
         try {
             Student s=conInstant.searchStudent(searchInput.getText());
-            String [] colTitiles = {"ID", "Name", "Age(Month)", "Registation Time","Years Enrolled", "Days to Anniversary"};
+            String [] colTitiles = {"ID", "Name", "Age(Month)", "Registation Time", "Days to Anniversary"};
             DefaultTableModel myTM = new DefaultTableModel();
             myTM.setColumnCount(colTitiles.length);
             myTM.setColumnIdentifiers(colTitiles);
             myTM.addRow(new Object[] {s.getStudentID(), s.getName(), s.getAge(),
                 s.getRegistrationTimeString(),
-                LocalDate.now().getYear()-s.getRegistrationTime().getYear(),
-                s.getRegistrationTime().getDayOfYear()-LocalDate.now().getDayOfYear()
+                conInstant.reRegisteration(s.getRegistrationTime())
                 });
             studentTable.setModel(myTM);
             studentTable.setAutoCreateRowSorter(true); 
         } catch (IndexOutOfBoundsException e) {
             JPanel myPanel = new JPanel();
                 myPanel.add(new JLabel("Plese enter a valid name"));
-                int result = JOptionPane.showConfirmDialog(null, myPanel,
+                JOptionPane.showConfirmDialog(null, myPanel,
                 "Error", JOptionPane.CLOSED_OPTION);
         }
     }//GEN-LAST:event_searchBtnActionPerformed
@@ -903,10 +902,18 @@ public class GUI extends javax.swing.JFrame {
         int result = JOptionPane.showConfirmDialog(null, myPanel, 
                "Update Student Registration Time", JOptionPane.OK_CANCEL_OPTION);
         if (result == JOptionPane.YES_OPTION) {
-            conInstant.regDateUpate(name.getText(), time.getText());            
-            updateStudentTable();
-            conInstant.courseRulesApplyer();
-            managmentText.append(name.getText() + "'s Registration Time Update..");
+            int state=conInstant.regDateUpate(name.getText(), time.getText());                       
+            if (state==1) {
+                conInstant.courseRulesApplyer();
+                managmentText.append(name.getText() + "'s Registration Time Update..");
+                updateStudentTable();
+            }
+            else{
+                JPanel myPanel1 = new JPanel();
+                myPanel1.add(new JLabel("Plese enter a valid name"));
+                JOptionPane.showConfirmDialog(null, myPanel1,
+                "Error", JOptionPane.CLOSED_OPTION);
+            }
         }
     }//GEN-LAST:event_updateActionPerformed
 
@@ -978,7 +985,7 @@ public class GUI extends javax.swing.JFrame {
         for (Student s : tmplist) {
             myTM.addRow(new Object[] {s.getStudentID(), s.getName(), s.getAge(), 
                 s.getRegistrationTimeString(), 
-                s.getRegistrationTime().getDayOfYear()-LocalDate.now().getDayOfYear()});
+                conInstant.reRegisteration(s.getRegistrationTime())});
         }
         studentTable.setModel(myTM);
         studentTable.setAutoCreateRowSorter(true); 

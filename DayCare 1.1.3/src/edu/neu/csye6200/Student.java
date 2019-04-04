@@ -16,12 +16,12 @@ public class Student extends Person implements Comparable<Student>{
 	private Map<String, Date> immTime=new Hashtable<String, Date>();
 	private String studentID;
 	//getters and setters
-	public Date getRegTime() {
-		return regTime;
-	}
-	public void setRegTime(Date regTime) {
-		this.regTime = regTime;
-	}
+//	public Date getRegTime() {
+//		return regTime;
+//	}
+//	public void setRegTime(Date regTime) {
+//		this.regTime = regTime;
+//	}
         
         public void setRegistrationTime(String t) {
                 this.registrationTime = LocalDate.parse(t);

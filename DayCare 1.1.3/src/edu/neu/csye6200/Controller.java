@@ -7,6 +7,7 @@ package edu.neu.csye6200;
 
 import java.awt.TextArea;
 import java.io.File;
+import java.time.LocalDate;
 import javax.swing.JFileChooser;
 import javax.swing.JTable;
 import java.util.ArrayList;
@@ -145,7 +146,7 @@ public class Controller {
     }
     
   
-    public String reRegisteration(Date d){
+    public long reRegisteration(LocalDate d){
         return Rules.reRegisterTime(d);
     }
     

@@ -3,6 +3,7 @@ package edu.neu.csye6200;
 
 import java.time.Clock;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -11,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Vector;
+import javafx.util.converter.LocalDateStringConverter;
 
 public class Rules {
 	public static Vector<Group> groupStudentByAge(Vector<Student> studentData,Vector<String> rules) {
@@ -121,6 +123,12 @@ public class Rules {
 		s1.close();
 		return yearNow+"-"+m+"-"+day;
 	}
+        public static long reRegisterTime(LocalDate d){
+            String tmp=d.format(DateTimeFormatter.ISO_DATE);
+            LocalDate result=LocalDate.parse(tmp);
+            result=result.plusYears(1);
+            return result.toEpochDay()-LocalDate.now().toEpochDay();
+        }
 	
 	private static Vector<Group> groupDiveder(Group g,int q){
 		Vector<Group> result=new Vector<Group>();
