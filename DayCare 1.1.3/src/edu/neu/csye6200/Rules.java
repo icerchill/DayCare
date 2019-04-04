@@ -2,7 +2,9 @@ package edu.neu.csye6200;
 
 
 import java.time.Clock;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -109,7 +111,7 @@ public class Rules {
 	
 	public static String reRegisterTime(Date d) {
                 Date now=new Date();
-                String yearNow=Integer.toString(now.getYear()+1900);      //死ね！
+                String yearNow=Integer.toString(now.getYear()+1900);      //死ね！       
 		String tmp=FileIO.Date2String(d);
 		Scanner s1=new Scanner(tmp);
 		s1.useDelimiter("-");

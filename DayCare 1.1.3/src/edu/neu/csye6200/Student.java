@@ -1,5 +1,6 @@
 package edu.neu.csye6200;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Hashtable;
 import java.util.Map;
@@ -7,6 +8,7 @@ import java.util.Scanner;
 
 public class Student extends Person implements Comparable<Student>{
 	private Date regTime;
+        private LocalDate registrationTime;
 	private double GPA;
 	private String ParentName;
 	private Map<String, Date> immTime=new Hashtable<String, Date>();
