@@ -11,6 +11,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JTable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Scanner;
 import java.util.Vector;
 /**
@@ -142,15 +143,61 @@ public class Controller {
             }
         }
     }
-    public ArrayList<Student> showUpcomingAni(){
-        return Filter.selectStudentAnni(db.getStudentData(), new Date());
-    }
+    
+  
     public String reRegisteration(Date d){
         return Rules.reRegisterTime(d);
     }
     
     public ArrayList<Student> showThisMonth() {
         return Filter.filterByDate(db.getStudentData());
+    }
+    
+    public Course courseFinder(String couresName){
+        Course result=new Course();
+        for (Course c : db.getCourse()) {
+            if (c.getCouresName().equals(couresName)) {
+                result=c;
+            }
+        }
+        return result;
+    }
+    public Group groupFinder(Course course,String groupName){
+        Group result=new Group();
+        for (Group g : course.getCourseGroup()) {
+            if (g.getGroupID().equals(groupName)) {
+                result=g;
+            }
+        }
+        return result;
+    }
+    
+    //これから新しいファンクションです
+    //use this method to update registeration time return 1=success 0=no found
+    public int regDateUpate(String studentName, String date){
+        int status=0;
+        for (Student s : db.getStudentData()) {
+            if (s.getName().equals(studentName)) {
+                s.setRegistrationTime(date);
+                status=1;
+                break;
+            }
+        }
+        return status;
+    }
+    //use this to save student info
+    public void saveStudent2file(String path){
+        List<String> studentInfo=new ArrayList<String>();
+        for (Student s : db.getStudentData()) {
+            studentInfo.add(s.toString());
+        }
+        FileIO.writeFile(path, studentInfo);
+    }
+    //use this to save course info
+    public void saveCourse2file(String path){
+        List<String> courseInfo=new ArrayList<String>();
+        courseInfo.add(this.getAllCourseInfo());
+        FileIO.writeFile(path, courseInfo);
     }
     
     
