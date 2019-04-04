@@ -173,6 +173,7 @@ public class Controller {
     }
     
     //これから新しいファンクションです
+//    123
     //use this method to update registeration time return 1=success 0=no found
     public int regDateUpate(String studentName, String date){
         int status=0;
