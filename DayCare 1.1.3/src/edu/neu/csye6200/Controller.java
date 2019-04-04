@@ -22,7 +22,7 @@ public class Controller {
     private Database db = new Database();
     
     public void importStudent(String fn) {
-        ArrayList<String> a1= FileIO.readFile(fn);
+        ArrayList<String> a1= FileIO.readFile(fn);        
         for (String s : a1) {
             db.addStudent(new Student(s));
         }
@@ -148,4 +148,10 @@ public class Controller {
     public String reRegisteration(Date d){
         return Rules.reRegisterTime(d);
     }
+    
+    public ArrayList<Student> showThisMonth() {
+        return Filter.filterByDate(db.getStudentData());
+    }
+    
+    
 }

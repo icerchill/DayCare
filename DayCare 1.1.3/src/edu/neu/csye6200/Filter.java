@@ -1,5 +1,6 @@
 package edu.neu.csye6200;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -9,7 +10,7 @@ import java.util.stream.Collectors;
 public class Filter {
 	public static Student selectStudent(Vector<Student> StudentData, String s ){
 		List<Student> result=new ArrayList<Student>();
-        result = StudentData.stream()
+                result = StudentData.stream()
                 .filter(b-> b.getName().equals(s))
                 .collect(Collectors.toList());
 		return result.get(0);       
@@ -36,6 +37,17 @@ public class Filter {
 		}
 		return result;
 	}
+        
+        public static ArrayList<Student> filterByDate(Vector<Student> studentDate) {
+            ArrayList<Student> result=new ArrayList<Student>();
+            studentDate.stream().filter((s) -> (s.getRegistrationTime().getMonth()== LocalDate.now().getMonth() 
+                    && s.getRegistrationTime().getDayOfMonth() > LocalDate.now().getDayOfMonth())).forEach((s) -> {
+                        result.add(s);
+                    });
+            return result;
+        }
+        
+        
 	
 }
 

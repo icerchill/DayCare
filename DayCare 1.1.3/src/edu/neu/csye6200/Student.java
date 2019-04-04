@@ -1,7 +1,9 @@
 package edu.neu.csye6200;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.Formatter;
 import java.util.Hashtable;
 import java.util.Map;
 import java.util.Scanner;
@@ -20,6 +22,18 @@ public class Student extends Person implements Comparable<Student>{
 	public void setRegTime(Date regTime) {
 		this.regTime = regTime;
 	}
+        
+        public void setRegistrationTime(String t) {
+                this.registrationTime = LocalDate.parse(t);
+        }
+        
+        public LocalDate getRegistrationTime() {
+                return registrationTime;
+        }
+        
+        public String getRegistrationTimeString() {
+                return registrationTime.format(DateTimeFormatter.ISO_DATE);
+        }
 	public double getGPA() {
 		return GPA;
 	}
@@ -60,7 +74,8 @@ public class Student extends Person implements Comparable<Student>{
 		this.setParentName(in.next());
 		this.setAge(in.nextInt());
 		this.GPA=in.nextDouble();
-		this.setRegTime(FileIO.String2Date(in.next()));
+                this.setRegistrationTime(in.next());
+//		this.setRegTime(FileIO.String2Date(in.next()));
 		String immunization=in.next();
 		Scanner im=new Scanner(immunization);
 		im.useDelimiter(";");
@@ -73,7 +88,8 @@ public class Student extends Person implements Comparable<Student>{
 	@Override
 	public String toString() {
 		return "age"+this.getAge()+" Student ["+"Name  "+getName()+",regTime="+regTime + ", GPA=" + GPA + ", ParentName=" + ParentName + ", immTime=" + immTime
-				+ ", studentID=" + studentID + "]";
+				+ ", studentID="
+                        + "" + studentID + "]";
 	}
 	@Override
 	public int compareTo(Student o) {

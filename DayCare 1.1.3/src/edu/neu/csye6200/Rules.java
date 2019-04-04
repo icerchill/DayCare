@@ -98,10 +98,10 @@ public class Rules {
 					Date dtmp=tmp.get(type);
 					dtmp.setYear(dtmp.getYear()+Integer.parseInt(ttl));
 					if (now.getTime()>=dtmp.getTime()) {
-						result+=type+" is expired at"+ FileIO.Date2String(dtmp)+"; ";
+						result+=type+" is expired at "+ FileIO.Date2String(dtmp)+"; ";
 					}
 					else if (dtmp.getTime()-now.getTime()<=(long)183*3600*1000*24) {
-						result+=type+ " will be expired at"+ FileIO.Date2String(dtmp) ;
+						result+=type+ " will be expired at "+ FileIO.Date2String(dtmp) ;
 					}
 				}
 			}
