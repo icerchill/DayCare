@@ -41,7 +41,8 @@ public class Filter {
         public static ArrayList<Student> filterByDate(Vector<Student> studentDate) {
             ArrayList<Student> result=new ArrayList<Student>();
             studentDate.stream().filter((s) -> (s.getRegistrationTime().getMonth()== LocalDate.now().getMonth() 
-                    && s.getRegistrationTime().getDayOfMonth() > LocalDate.now().getDayOfMonth())).forEach((s) -> {
+                    && s.getRegistrationTime().getDayOfMonth() > LocalDate.now().getDayOfMonth())
+                    ||s.getRegistrationTime().getDayOfYear()-LocalDate.now().getDayOfYear()<0).forEach((s) -> {
                         result.add(s);
                     });
             return result;
